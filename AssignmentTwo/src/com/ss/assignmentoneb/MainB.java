@@ -22,6 +22,8 @@ public class MainB {
 		s = new Triangle(3.0, 5.0);
 		System.out.println("Creating triangle with base 3.0 and height 5.0");
 		System.out.println("calculateArea(): " + s.calculateArea() + "\tdisplay(): " + s.display() + "\n");
+		
+		
 	}
 
 }
