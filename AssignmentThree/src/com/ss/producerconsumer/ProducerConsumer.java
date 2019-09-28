@@ -11,8 +11,8 @@ public class ProducerConsumer
 		// Acts as a buffer which holds 128 Objects
 		LinkedBlockingDeque<Object> goods = new LinkedBlockingDeque<Object>(10);
 		
-		Thread producer = new Thread(example.new ProducerThread(goods, 250), "Producer");
-		Thread consumer = new Thread(example.new ConsumerThread(goods, 750), "Consumer");
+		Thread producer = new Thread(example.new ProducerThread(goods, 500), "Producer");
+		Thread consumer = new Thread(example.new ConsumerThread(goods, 500), "Consumer");
 		
 		producer.start();
 		consumer.start();
