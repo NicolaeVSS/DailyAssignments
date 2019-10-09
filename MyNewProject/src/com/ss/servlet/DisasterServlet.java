@@ -3,6 +3,7 @@ package com.ss.servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,25 +58,28 @@ public class DisasterServlet extends HttpServlet {
 		
 		LoginInfo sentData = gson.fromJson(request.getReader(), LoginInfo.class);
 
-		//log("Data sent: " + sentData.getUsername() + " " + sentData.getPassword());
-		
-		boolean loggedIn = false;
-		for(LoginInfo login: logins) 
+		if(sentData == null || sentData.getUsername() == null || sentData.getPassword() == null) 
 		{
-			if(sentData.getUsername().equals(login.getUsername()) &&
-				sentData.getPassword().equals(login.getPassword())) 
-			{
-				loggedIn = true;
-			}
+			log("null data recieved");
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
 		}
 		
-		if(loggedIn)
+		//log("Data sent: " + sentData.getUsername() + " " + sentData.getPassword());
+		
+		logins = logins.stream().filter(ele -> ele.equals(sentData)).collect(Collectors.toList());
+
+		if(logins.size() == 1)
 		{
 			response.sendRedirect("success.jsp");
 		}
-		else 
+		else if(logins.size() == 0)
 		{
 			response.sendRedirect("fail.jsp");
+		}
+		else 
+		{
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 		}
 	}
 }

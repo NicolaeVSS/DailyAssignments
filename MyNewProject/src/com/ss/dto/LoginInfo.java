@@ -1,8 +1,13 @@
 package com.ss.dto;
 
-public class LoginInfo {
-	String username;
-	String password;
+import java.io.Serializable;
+
+public class LoginInfo implements Serializable
+{
+	private static final long serialVersionUID = 3875707091325080285L;
+	
+	private String username;
+	private String password;
 	
 	public LoginInfo(String username, String password) {
 		super();
@@ -26,6 +31,20 @@ public class LoginInfo {
 		this.password = password;
 	}
 	
-	
-	
+	@Override
+	public boolean equals(Object o) 
+	{
+		if (o instanceof LoginInfo)
+		{
+			LoginInfo other = (LoginInfo) o;
+			
+			if(other.getUsername().equals(this.getUsername()) &&
+				other.getPassword().equals(this.getPassword())) 
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }
