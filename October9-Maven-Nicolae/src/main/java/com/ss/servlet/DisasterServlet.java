@@ -67,7 +67,7 @@ public class DisasterServlet extends HttpServlet {
 
 		if(logins.size() == 1)
 		{
-			response.getWriter().print("Success!");
+			response.getWriter().print("Success! Welcome " + logins.get(0).getUsername());
 		}
 		else if(logins.size() == 0)
 		{
